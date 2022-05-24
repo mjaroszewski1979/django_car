@@ -1,0 +1,11 @@
+{% csrf_token %}
+<form class="sortable list-group" hx-trigger="end" hx-post="{% url 'sort' %}" hx-target="#car-list">
+    <div class="htmx-indicator">Updating...</div>
+    {% for car in cars %}
+    <article class="thumb">
+        <a href="{{ car.photo.url }}" class="image"><img src="{{ car.photo.url }}" alt="" /></a>
+        <h2>{{ car.producer }}</h2>
+        <p>{{ car.country_of_origin|upper }} | {{ car.year_of_production }}</p>
+    </article>
+    {% endfor %}
+</form>
