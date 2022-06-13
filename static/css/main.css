@@ -2048,3 +2048,7 @@ input, select, textarea {
 		#footer .copyright a {
 			color: inherit;
 		}
+
+.register {
+	padding: 2em;
+}
