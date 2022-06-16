@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block title %}Login Page{% endblock title %}
 {% block content %}
         <div id="main">
@@ -16,15 +17,17 @@
                         <div class="register">
 								<section>
 									<h2>Login form</h2>
-									<form method="post" action="#">
+									<form method="POST" action="{% url 'login' %}" autocomplete="off">
+										{% csrf_token %}
 										<div class="fields">
+											{% for field in form %}
 											<div class="field half">
-												<input type="text" name="email" id="email" placeholder="Email" />
+												{{ field.errors }}
+												{% render_field field class="field half" placeholder=field.name %}
 											</div>
-											<div class="field half">
-												<input type="text" name="password" id="password" placeholder="Password" />
-											</div>
+											{% endfor %}
 										</div>
+	
 										<ul class="actions">
 											<li><input type="submit" value="Login" class="primary" /></li>
 											<li><input type="reset" value="Reset" /></li>

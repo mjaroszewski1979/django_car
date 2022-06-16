@@ -6,13 +6,13 @@
 						<h1><a href="index.html"><strong>Multiverse</strong> by HTML5 UP</a></h1>
 						<nav>
 							<ul>
-								<li><a hx-get="{% url 'register' %}"  hx-target="#wrapper" class="icon solid fa-user-check">Register</a></li>
-								<li><a hx-get="{% url 'login' %}"  hx-target="#wrapper" class="icon solid fa-user-lock">Login</a></li>
+								<li><a href="{% url 'register' %}">Register</a></li>
+								<li><a href="{% url 'login' %}">Login</a></li>
 							</ul>
 						</nav>
 					</header>
 
-				<!-- Main -->
+				<!-- Main 
 					<div id="main">
 							{% for car in cars %}
 							<article class="thumb">
@@ -20,5 +20,5 @@
 								<p>{{ car.producer|upper }} | {{ car.country_of_origin|upper }} | {{ car.year_of_production }}</p>
 							</article>
     						{% endfor %}
-					</div>
+					</div> -->
 {% endblock content %}
