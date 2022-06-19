@@ -26,8 +26,12 @@
 												<div class="text-danger mt-2" id="username-err"></div>
 											</div>
 											<div class="field half">
-												{{ form.password.errors }}
-												{% render_field form.password placeholder='PASSWORD' %}
+												{{ form.password1.errors }}
+												{% render_field form.password1 placeholder='PASSWORD' %}
+											</div>
+											<div class="field half">
+												{{ form.password2.errors }}
+												{% render_field form.password2 placeholder='CONFIRM PASSWORD' %}
 											</div>
 										</div>
 										<ul class="actions">
