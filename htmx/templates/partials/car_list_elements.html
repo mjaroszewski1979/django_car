@@ -1,0 +1,23 @@
+{% for car in cars %}
+
+{% if forloop.last %} 
+<div hx-get="{% url 'car_list' %}?page={{ page_obj.number|add:1 }}" hx-trigger="revealed" hx-swap="afterend" hx-target="this">
+{% else %} 
+<div>
+{% endif %}
+    
+    <input type="hidden" name="car_order" value="{{ car.id }}" />
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a hx-get="{% url 'detail' car.id %}" 
+            hx-target="#car-list"
+            hx-push-url="/cars/{{ car.car.producer }}">
+            #{{car.order}} {{ car.car.producer }}
+        </a>
+        <span class="badge badge-danger badge-pill" 
+            style="cursor: pointer;"
+            hx-delete="{% url 'delete_car' car.pk %}"
+            hx-target="#car-list"
+            hx-confirm="Are you sure you wish to delete?">X</span>
+    </li>
+</div>
+{% endfor %}

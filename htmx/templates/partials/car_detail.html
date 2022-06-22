@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}Login Page{% endblock title %}
+{% block content %}
+        <div id="main">
+            <!-- Header -->
+					<header id="header">
+						<h1><a href="index.html"><strong>YouCars</strong> by MJaroszewski</a></h1>
+						<nav>
+							<ul>
+								<li><a href="{% url 'home' %}"  class="icon solid fa-info-circle">Home</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+                <div>
+                    <h2 class="text-success mb-4">{{ user_car.car.producer }}</h2>
+                    <p>This car is #{{ user_car.order }} in {{ user_car.user.username|title}}'s list</p>
+                    <button class="btn btn-primary" hx-get="{% url 'car_list' %}" hx-target="#car-list" hx-push-url="/cars">
+                        Your list
+                    </button>
+                </div>
+                <div>
+                    {% if user_car.car.photo %}
+                        <img src="{{ user_car.car.photo.url }}" style="max-width: 200px; max-height: 200px;">
+                    {% else %}
+                        <p>No photo</p>
+                    {% endif %}
+                <form hx-encoding="multipart/form-data" hx-post="{% url 'upload_photo' user_car.id %}" hx-target="#car-list">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="file" name="photo">
+                    </div>
+                    <button class="btn btn-success" type="submit">Upload</button>
+                </form>
+
+        </div>
+{% endblock content %}
