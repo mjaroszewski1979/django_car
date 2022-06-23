@@ -19,8 +19,9 @@ from .utils import get_max_order, reorder
 class HomeView(View):
     
     def get(self, request):
+
         context = {}
-        context['cars'] = Car.objects.all()
+        context['cars'] = UserCars.objects.filter(user=request.user)
 
         return render(request, 'index.html', context)
 
@@ -39,7 +40,6 @@ class Login(LoginView):
 class CarList(LoginRequiredMixin, ListView):
     template_name = 'cars.html'
     model = UserCars
-    paginate_by = 15
     context_object_name = 'cars'
 
     def get_template_names(self):

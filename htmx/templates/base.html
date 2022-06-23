@@ -19,19 +19,29 @@
 	</head>
 	<body class="is-preload">
 
+		<header id="header">
+			<h1><a href="{% url 'home' %}"><strong>YouCars</strong> by MJaroszewski</a></h1>
+			<nav>
+				<ul>
+					{% if not user.is_authenticated %}
+					<li><a href="{% url 'register' %}">Register</a></li>
+					<li><a href="{% url 'login' %}">Login</a></li>
+					{% else %}
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+					<li><a href="{% url 'car_list' %}">My Cars</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</header>
+
 		<!-- Wrapper -->
-			<div id="wrapper">
+			<div>
                 {% block content %}
                 {% endblock content %}
 			</div>
 
 		<!-- Scripts -->
-			<script src="{% static 'js/jquery.min.js' %}"></script>
-            <script src="{% static 'js/jquery.poptrox.min.js' %}"></script>
-            <script src="{% static 'js/browser.min.js' %}"></script>
-            <script src="{% static 'js/breakpoints.min.js' %}"></script>
-            <script src="{% static 'js/util.js' %}"></script>
-            <script src="{% static 'js/main.js' %}"></script>
+
 			<script>
 				document.body.addEventListener('htmx:configRequest', (event) => {
 					event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
@@ -48,6 +58,12 @@
 				}
 			})
 			</script>
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.poptrox.min.js' %}"></script>
+			<script src="{% static 'js/browser.min.js' %}"></script>
+			<script src="{% static 'js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
 
 	</body>
 </html>
