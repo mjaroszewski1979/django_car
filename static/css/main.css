@@ -1,5 +1,6 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic");
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Orbitron&display=swap');
 
 /*
 	Multiverse by HTML5 UP
@@ -2051,4 +2052,35 @@ input, select, textarea {
 
 .register {
 	padding: 2em;
+}
+
+.car-list-button {
+	margin: 1em;
+}
+
+.car-list-main {
+	margin-top: 1em;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.car-list-elements {
+	list-style: none;
+	cursor: pointer;
+}
+.car-list-elements a {
+	color: white;
+	border-bottom: none;
+
+}
+
+
+.span-delete {
+	font-family: 'Orbitron', sans-serif;
+	font-size: small;
+	color: white;
+}
+
+.span-delete:hover {
+	color: red;
 }

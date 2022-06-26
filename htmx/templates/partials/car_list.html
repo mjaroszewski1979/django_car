@@ -2,11 +2,11 @@
 {% load widget_tweaks %}
 {% block title %}Login Page{% endblock title %}
 {% block content %}
-<div class="d-flex justify-content-between align-items-center">
-    <p class="lead ml-0">My Cars</p>
+<div class="car-list-main">
+    <h3>MY CARS</h3>
     <form hx-post="{% url 'add_car' %}" hx-target='#car-list' class="d-flex align-items-center">
-        <input type="text" name="car_producer" class="form-control-sm mr-2" placeholder="Enter a car" />
-        <button type="submit" class="btn btn-success btn-sm">Add Car</button>
+        <input type="text" name="car_producer" class="form-control-sm mr-2" placeholder="ENTER CAR NAME" />
+        <button type="submit" class="car-list-button">Add Car</button>
     </form>
 </div>
 <hr/>
