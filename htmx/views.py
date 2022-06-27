@@ -64,7 +64,7 @@ def add_car(request):
     if not UserCars.objects.filter(car=car, user=request.user).exists():
         UserCars.objects.create(car=car, user=request.user, order=get_max_order(request.user))
     cars = UserCars.objects.filter(user=request.user)
-    messages.success(request, f"Added {car_producer} to list of cars")
+    messages.success(request, f"ADDED {car_producer.upper()} TO LIST OF CARS")
     return render(request, 'partials/car_list.html', {'cars': cars})
 
 @login_required
@@ -80,8 +80,8 @@ def search_car(request):
     search_text = request.POST.get('search')
 
     user_cars = UserCars.objects.filter(user=request.user)
-    results = Car.objects.filter(name__icontains=search_text).exclude(
-        name__in=user_cars.values_list('car_producer', flat=True)
+    results = Car.objects.filter(producer__icontains=search_text).exclude(
+        producer__in=user_cars.values_list('car__producer', flat=True)
     )
     context = {"results": results}
     return render(request, 'partials/search_results.html', context)

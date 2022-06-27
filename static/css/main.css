@@ -2053,6 +2053,9 @@ input, select, textarea {
 .register {
 	padding: 2em;
 }
+.align-center {
+	margin-top: 2em;
+}
 
 .car-list-button {
 	margin: 1em;
@@ -2064,9 +2067,14 @@ input, select, textarea {
 	padding-right: 20%;
 }
 
-.car-list-elements {
+.car-list-elements,
+.search-results-ul {
 	list-style: none;
 	cursor: pointer;
+}
+.car-list-hr {
+	margin-right: 15%;
+	margin-left: 15%;
 }
 .car-list-elements a {
 	color: white;
@@ -2075,12 +2083,41 @@ input, select, textarea {
 }
 
 
-.span-delete {
+.span-delete,
+.search-results-span {
 	font-family: 'Orbitron', sans-serif;
 	font-size: small;
 	color: white;
 }
 
+.search-results-span:hover {
+	color: green;
+}
+
 .span-delete:hover {
 	color: red;
+}
+ .search-element {
+	padding-left: 20%;
+	padding-right: 20%;
+ }
+ .search-input,
+ .add-car-input {
+	text-align: center;
+ }
+
+ .detail-hr {
+	margin-right: 35%;
+	margin-left: 35%;
+ }
+
+ .upload-wrap {
+    position: relative;
+	margin-top: 1em;
+}
+
+.upload-btn {
+    position: absolute;
+    left: 0;
+    opacity: 0;
 }

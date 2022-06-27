@@ -1,25 +1,13 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
-{% block title %}Login Page{% endblock title %}
+{% block title %}Detail Page{% endblock title %}
 {% block content %}
-        <div id="main">
-            <!-- Header -->
-					<header id="header">
-						<h1><a href="index.html"><strong>YouCars</strong> by MJaroszewski</a></h1>
-						<nav>
-							<ul>
-								<li><a href="{% url 'home' %}"  class="icon solid fa-info-circle">Home</a></li>
-							</ul>
-						</nav>
-					</header>
+        <div id="detail-main">
 
 				<!-- Main -->
                 <div>
-                    <h2 class="text-success mb-4">{{ user_car.car.producer }}</h2>
-                    <p>This car is #{{ user_car.order }} in {{ user_car.user.username|title}}'s list</p>
-                    <button class="btn btn-primary" hx-get="{% url 'car_list' %}" hx-target="#car-list" hx-push-url="/cars">
-                        Your list
-                    </button>
+                    <h1>{{ user_car.car.producer }}</h2>
+                    <p>THIS CAR IS #{{ user_car.order }} IN {{ user_car.user.username|upper}}'S LIST</p>
                 </div>
                 <div>
                     {% if user_car.car.photo %}
@@ -29,11 +17,15 @@
                     {% endif %}
                 <form hx-encoding="multipart/form-data" hx-post="{% url 'upload_photo' user_car.id %}" hx-target="#car-list">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <input type="file" name="photo">
+                    <div class="upload-wrap">
+                        <button type="button" class="nice-button">upload file</button>
+                        <input type="file" name="photo" class="upload-btn">
                     </div>
-                    <button class="btn btn-success" type="submit">Upload</button>
                 </form>
+                <hr class="detail-hr">
+                <button class="btn btn-primary" hx-get="{% url 'car_list' %}" hx-target="#car-list" hx-push-url="/cars">
+                    Your list
+                </button>
 
         </div>
 {% endblock content %}
