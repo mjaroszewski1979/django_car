@@ -20,10 +20,9 @@ class HomeView(View):
     
     def get(self, request):
 
-        context = {}
-        context['cars'] = UserCars.objects.filter(user=request.user)
 
-        return render(request, 'index.html', context)
+
+        return render(request, 'index.html')
 
 class RegisterView(FormView):
     form_class = RegisterForm

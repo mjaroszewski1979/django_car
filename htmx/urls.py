@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 
 from . import views
@@ -20,5 +20,6 @@ urlpatterns = [
     path('detail/<int:id>/', views.detail, name='detail'),
     path('car-list-partial', views.cars_partial, name='car_list_partial'),
     path('upload-photo/<int:id>/', views.upload_photo, name='upload_photo'),
+    path('accounts/', include('allauth.urls') ),
  
 ]
