@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
+{% load socialaccount %}
 {% block title %}Login Page{% endblock title %}
 {% block content %}
         <div id="main">
@@ -26,10 +27,12 @@
 												{% render_field field class="field half" placeholder=field.name %}
 											</div>
 											{% endfor %}
+                
 										</div>
 	
 										<ul class="actions">
 											<li><input type="submit" value="Login" class="primary" /></li>
+											<li><button><a href="{% provider_login_url 'google' %}" role="button" aria-pressed="true">Sign in with Google</a></button></li>
 											<li><input type="reset" value="Reset" /></li>
 										</ul>
 									</form>
