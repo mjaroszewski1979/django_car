@@ -19,9 +19,6 @@ from .utils import get_max_order, reorder
 class HomeView(View):
     
     def get(self, request):
-
-
-
         return render(request, 'index.html')
 
 class RegisterView(FormView):

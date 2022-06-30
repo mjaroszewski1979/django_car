@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
-{% block title %}Login Page{% endblock title %}
+{% block title %}Cars List{% endblock title %}
 {% block content %}
 <div class="car-list-main">
     <h3>MY CARS</h3>
@@ -31,7 +31,7 @@
                 {% include 'partials/car_list_elements.html' %}
             </form>
         {% else %}
-            <p>You do not have any cars</p>
+            <p>YOU DO NOT HAVE CARS YET...</p>
         {% endif %}
     
     </section>

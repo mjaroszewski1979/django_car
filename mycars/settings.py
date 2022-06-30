@@ -85,6 +85,8 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
 WSGI_APPLICATION = 'mycars.wsgi.application'
 
 
