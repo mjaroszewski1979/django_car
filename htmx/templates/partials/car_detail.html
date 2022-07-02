@@ -13,13 +13,16 @@
                     {% if user_car.car.photo %}
                         <img src="{{ user_car.car.photo.url }}" style="max-width: 200px; max-height: 200px;">
                     {% else %}
-                        <p>No photo</p>
+                        <p>NO PHOTO</p>
                     {% endif %}
                 <form hx-encoding="multipart/form-data" hx-post="{% url 'upload_photo' user_car.id %}" hx-target="#car-list">
                     {% csrf_token %}
                     <div class="upload-wrap">
-                        <button type="button" class="nice-button">upload file</button>
-                        <input type="file" name="photo" class="upload-btn">
+                        <label for="file-upload" class="custom-file-upload">
+                            UPLOAD FILE
+                       </label>
+                       <input id="file-upload" type="file" name="photo"/>
+                       <button type="submit" class="nice-button">SEND</button>
                     </div>
                 </form>
                 <hr class="detail-hr">
