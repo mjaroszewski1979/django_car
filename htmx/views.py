@@ -15,6 +15,11 @@ class HomeView(View):
     def get(self, request):
         return render(request, 'index.html')
 
+class SphinxView(View):
+    
+    def get(self, request):
+        return render(request, 'sphinx.html')
+
 class RegisterView(FormView):
     form_class = RegisterForm
     template_name = 'register.html'
