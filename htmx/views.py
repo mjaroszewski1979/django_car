@@ -11,8 +11,14 @@ from .models import UserCars
 
 
 class HomeView(View):
+
+    """HomeView Class which is responsile for rendering index page"""
     
     def get(self, request):
+        """
+        This is a method responsible for handling HTTP GET requests
+        :param request: HttpRequest object
+        """
         return render(request, 'index.html')
 
 class SphinxView(View):
