@@ -6,27 +6,44 @@ from django.views.generic import FormView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+# App imports
 from .forms import RegisterForm
 from .models import UserCars
 
 
 class HomeView(View):
 
-    """HomeView Class which is responsile for rendering index page"""
+    """HomeView Class will render index page."""
     
     def get(self, request):
         """
-        This is a method responsible for handling HTTP GET requests
-        :param request: HttpRequest object
+        This function is responsible for handling HTTP GET requests.
+
+        :type name: HttpRequest object
+        :param request: contains metadata about the request
         """
         return render(request, 'index.html')
 
 class SphinxView(View):
+
+    """SphinxView Class will render sphinx page."""
     
     def get(self, request):
+        """
+        This function is responsible for handling HTTP GET requests.
+
+        :type name: HttpRequest object
+        :param request: contains metadata about the request
+        """
         return render(request, 'sphinx.html')
 
 class RegisterView(FormView):
+
+    """
+    RegisterView Class will render register page. It uses RegisterForm and it will
+    redirect to the login page after successful registration.
+
+    """
     form_class = RegisterForm
     template_name = 'register.html'
     success_url = reverse_lazy('login')
@@ -36,9 +53,23 @@ class RegisterView(FormView):
         return super().form_valid(form)
 
 class Login(LoginView):
+
+    """LoginView Class will render login page."""
+
     template_name = 'login.html'
 
 class CarList(LoginRequiredMixin, ListView):
+
+    """
+    CarListView Class will render cars page. In case of request
+    being made via HTMX it will inject car_list_element partial.
+    It uses UserCars model and sets context object name to 'cars'.
+    This class will work with LoginRequiredMixin to secure view 
+    by forcing the client to authenticate with a valid logged-in User.
+    It also takes advantage of QuerySet prefetch_related method
+    to avoid additional queries when accessing the related objects.
+    """
+
     template_name = 'cars.html'
     model = UserCars
     context_object_name = 'cars'

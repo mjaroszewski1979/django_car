@@ -70,27 +70,44 @@
 <span class="kn">from</span> <span class="nn">django.views.generic.list</span> <span class="kn">import</span> <span class="n">ListView</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.mixins</span> <span class="kn">import</span> <span class="n">LoginRequiredMixin</span>
 
+<span class="c1"># App imports</span>
 <span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">RegisterForm</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">UserCars</span>
 
 
 <div class="viewcode-block" id="HomeView"><a class="viewcode-back" href="../../htmx.html#htmx.views.HomeView">[docs]</a><span class="k">class</span> <span class="nc">HomeView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
 
-    <span class="sd">&quot;&quot;&quot;HomeView Class which is responsile for rendering index page&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;HomeView Class will render index page.&quot;&quot;&quot;</span>
     
 <div class="viewcode-block" id="HomeView.get"><a class="viewcode-back" href="../../htmx.html#htmx.views.HomeView.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This is a method responsible for handling HTTP GET requests</span>
-<span class="sd">        :param request: HttpRequest object</span>
+<span class="sd">        This function is responsible for handling HTTP GET requests.</span>
+
+<span class="sd">        :type name: HttpRequest object</span>
+<span class="sd">        :param request: contains metadata about the request</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;index.html&#39;</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="SphinxView"><a class="viewcode-back" href="../../htmx.html#htmx.views.SphinxView">[docs]</a><span class="k">class</span> <span class="nc">SphinxView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;SphinxView Class will render sphinx page.&quot;&quot;&quot;</span>
     
 <div class="viewcode-block" id="SphinxView.get"><a class="viewcode-back" href="../../htmx.html#htmx.views.SphinxView.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function is responsible for handling HTTP GET requests.</span>
+
+<span class="sd">        :type name: HttpRequest object</span>
+<span class="sd">        :param request: contains metadata about the request</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;sphinx.html&#39;</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="RegisterView"><a class="viewcode-back" href="../../htmx.html#htmx.views.RegisterView">[docs]</a><span class="k">class</span> <span class="nc">RegisterView</span><span class="p">(</span><span class="n">FormView</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    RegisterView Class will render register page. It uses RegisterForm and it will</span>
+<span class="sd">    redirect to the login page after successful registration.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">form_class</span> <span class="o">=</span> <span class="n">RegisterForm</span>
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;register.html&#39;</span>
     <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
@@ -100,9 +117,23 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">form_valid</span><span class="p">(</span><span class="n">form</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="Login"><a class="viewcode-back" href="../../htmx.html#htmx.views.Login">[docs]</a><span class="k">class</span> <span class="nc">Login</span><span class="p">(</span><span class="n">LoginView</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;LoginView Class will render login page.&quot;&quot;&quot;</span>
+
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;login.html&#39;</span></div>
 
 <div class="viewcode-block" id="CarList"><a class="viewcode-back" href="../../htmx.html#htmx.views.CarList">[docs]</a><span class="k">class</span> <span class="nc">CarList</span><span class="p">(</span><span class="n">LoginRequiredMixin</span><span class="p">,</span> <span class="n">ListView</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CarListView Class will render cars page. In case of request</span>
+<span class="sd">    being made via HTMX it will inject car_list_element partial.</span>
+<span class="sd">    It uses UserCars model and sets context object name to &#39;cars&#39;.</span>
+<span class="sd">    This class will work with LoginRequiredMixin to secure view </span>
+<span class="sd">    by forcing the client to authenticate with a valid logged-in User.</span>
+<span class="sd">    It also takes advantage of QuerySet prefetch_related method</span>
+<span class="sd">    to avoid additional queries when accessing the related objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">template_name</span> <span class="o">=</span> <span class="s1">&#39;cars.html&#39;</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">UserCars</span>
     <span class="n">context_object_name</span> <span class="o">=</span> <span class="s1">&#39;cars&#39;</span>

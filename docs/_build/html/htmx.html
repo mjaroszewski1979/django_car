@@ -128,6 +128,8 @@
 <dt class="sig sig-object py" id="htmx.forms.RegisterForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">htmx.forms.</span></span><span class="sig-name descname"><span class="pre">RegisterForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/forms.html#RegisterForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.forms.RegisterForm" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></p>
+<p>This class will extend UserCreationForm to provide registration fields
+for User model</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="htmx.forms.RegisterForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/htmx/forms.html#RegisterForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.forms.RegisterForm.Meta" title="Permalink to this definition"></a></dt>
@@ -169,47 +171,137 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.add_car">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">add_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#add_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.add_car" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function uses login_required decorator to secure view by forcing the client
+to authenticate with a valid logged-in User. After fetching car producer submited via
+htmx post request it checks for existing UserCars objects. If car with provided car producer
+name does not exists this function will add new record to UserCars model. It will attach success
+message to request object and make it available in the frontend template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.cars_partial">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">cars_partial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#cars_partial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.cars_partial" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function uses login_required decorator to secure view by forcing the client
+to authenticate with a valid logged-in User. It will return all UserCars model
+instances for currently logged-in user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.check_username">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">check_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#check_username"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.check_username" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function will check if submited username already exists. It filters user model
+with data obtained from post request send by htmx (forms name attribute) and returns http response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.clear">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.clear" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function will use empty string as a HttpResponse to make it available for
+swapping content between two divs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.delete_car">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">delete_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#delete_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.delete_car" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function uses login_required decorator to secure view by forcing the client
+to authenticate with a valid logged-in User. It is also utilizing require_hhtp_methods
+decorator to enable only delete requests. This function will delete existing object
+from UserCars model with given id number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – contains metadata about the request</p></li>
+<li><p><strong>id</strong> – field added automatically by django - auto-incrementing primary key</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.detail">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.detail" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function uses login_required decorator to secure view by forcing the client
+to authenticate with a valid logged-in User. It returns details of a single model instance
+to be available in the frontend as a context dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – contains metadata about the request</p></li>
+<li><p><strong>id</strong> – field added automatically by django - auto-incrementing primary key</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.search_car">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">search_car</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#search_car"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.search_car" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function uses login_required decorator to secure view by forcing the client
+to authenticate with a valid logged-in User. After fetching search text submited via
+htmx post request it filters existing Car model objects. It is also excluding from
+search results currently logged-in UserCars objects. It utilizes icontains parameter
+to ensure case insensitive filtering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.sort">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.sort" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function will work with JavaScript Sortable library for reorderable drag-and-drop lists.
+It will ensure that potential changes made to order of UserCars objects in the frontend are
+also reflected in the backend. This function will take advantage of QuerySet prefetch_related method
+to avoid additional queries when accessing the related objects. It will utilize bulk update method
+to update different rows with different values. In this case we want to update all existing UserCars
+objects with new order values obtained using JS sortable and HTMX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.htmx_views.upload_photo">
 <span class="sig-prename descclassname"><span class="pre">htmx.htmx_views.</span></span><span class="sig-name descname"><span class="pre">upload_photo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/htmx_views.html#upload_photo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.htmx_views.upload_photo" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function uses login_required decorator to secure view by forcing the client
+to authenticate with a valid logged-in User. It will fetch an existing instance of
+UserCars model given id provided in the frontend. It also obtains from request.FILES
+uploaded image using form attribute enctype=”multipart/form-data”. After saving UserCars
+model instance with added image this function will make it available in frontend as a
+context dictionary record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – contains metadata about the request</p></li>
+<li><p><strong>id</strong> – field added automatically by django - auto-incrementing primary key</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-htmx.models">
@@ -615,6 +707,13 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt class="sig sig-object py" id="htmx.views.CarList">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">htmx.views.</span></span><span class="sig-name descname"><span class="pre">CarList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#CarList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.CarList" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginRequiredMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ListView</span></code></p>
+<p>CarListView Class will render cars page. In case of request
+being made via HTMX it will inject car_list_element partial.
+It uses UserCars model and sets context object name to ‘cars’.
+This class will work with LoginRequiredMixin to secure view
+by forcing the client to authenticate with a valid logged-in User.
+It also takes advantage of QuerySet prefetch_related method
+to avoid additional queries when accessing the related objects.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="htmx.views.CarList.context_object_name">
 <span class="sig-name descname"><span class="pre">context_object_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cars'</span></em><a class="headerlink" href="#htmx.views.CarList.context_object_name" title="Permalink to this definition"></a></dt>
@@ -652,12 +751,16 @@ a list. May not be called if render_to_response is overridden.</p>
 <dt class="sig sig-object py" id="htmx.views.HomeView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">htmx.views.</span></span><span class="sig-name descname"><span class="pre">HomeView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#HomeView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.HomeView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
-<p>HomeView Class which is responsile for rendering index page</p>
+<p>HomeView Class will render index page.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="htmx.views.HomeView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#HomeView.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.HomeView.get" title="Permalink to this definition"></a></dt>
-<dd><p>This is a method responsible for handling HTTP GET requests
-:param request: HttpRequest object</p>
+<dd><p>This function is responsible for handling HTTP GET requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -666,6 +769,7 @@ a list. May not be called if render_to_response is overridden.</p>
 <dt class="sig sig-object py" id="htmx.views.Login">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">htmx.views.</span></span><span class="sig-name descname"><span class="pre">Login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#Login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.Login" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LoginView</span></code></p>
+<p>LoginView Class will render login page.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="htmx.views.Login.template_name">
 <span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'login.html'</span></em><a class="headerlink" href="#htmx.views.Login.template_name" title="Permalink to this definition"></a></dt>
@@ -677,6 +781,8 @@ a list. May not be called if render_to_response is overridden.</p>
 <dt class="sig sig-object py" id="htmx.views.RegisterView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">htmx.views.</span></span><span class="sig-name descname"><span class="pre">RegisterView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#RegisterView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.RegisterView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FormView</span></code></p>
+<p>RegisterView Class will render register page. It uses RegisterForm and it will
+redirect to the login page after successful registration.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="htmx.views.RegisterView.form_class">
 <span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#htmx.views.RegisterView.form_class" title="Permalink to this definition"></a></dt>
@@ -705,10 +811,17 @@ a list. May not be called if render_to_response is overridden.</p>
 <dt class="sig sig-object py" id="htmx.views.SphinxView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">htmx.views.</span></span><span class="sig-name descname"><span class="pre">SphinxView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#SphinxView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.SphinxView" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">View</span></code></p>
+<p>SphinxView Class will render sphinx page.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="htmx.views.SphinxView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/views.html#SphinxView.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.views.SphinxView.get" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function is responsible for handling HTTP GET requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – contains metadata about the request</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

@@ -70,10 +70,18 @@
 <span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
 
+<span class="c1"># App imports</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Car</span><span class="p">,</span> <span class="n">UserCars</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_max_order</span><span class="p">,</span> <span class="n">reorder</span>
 
 <div class="viewcode-block" id="check_username"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.check_username">[docs]</a><span class="k">def</span> <span class="nf">check_username</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function will check if submited username already exists. It filters user model</span>
+<span class="sd">    with data obtained from post request send by htmx (forms name attribute) and returns http response.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">get_user_model</span><span class="p">()</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;This username already exists&quot;</span><span class="p">)</span>
@@ -82,6 +90,16 @@
 
 <div class="viewcode-block" id="add_car"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.add_car">[docs]</a><span class="nd">@login_required</span>
 <span class="k">def</span> <span class="nf">add_car</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uses login_required decorator to secure view by forcing the client </span>
+<span class="sd">    to authenticate with a valid logged-in User. After fetching car producer submited via</span>
+<span class="sd">    htmx post request it checks for existing UserCars objects. If car with provided car producer</span>
+<span class="sd">    name does not exists this function will add new record to UserCars model. It will attach success</span>
+<span class="sd">    message to request object and make it available in the frontend template.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">car_producer</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;car_producer&#39;</span><span class="p">)</span>
     <span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">producer</span><span class="o">=</span><span class="n">car_producer</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">car</span><span class="o">=</span><span class="n">car</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -93,6 +111,17 @@
 <div class="viewcode-block" id="delete_car"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.delete_car">[docs]</a><span class="nd">@login_required</span>
 <span class="nd">@require_http_methods</span><span class="p">([</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">delete_car</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uses login_required decorator to secure view by forcing the client </span>
+<span class="sd">    to authenticate with a valid logged-in User. It is also utilizing require_hhtp_methods</span>
+<span class="sd">    decorator to enable only delete requests. This function will delete existing object</span>
+<span class="sd">    from UserCars model with given id number.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    :type name: int</span>
+<span class="sd">    :param id: field added automatically by django - auto-incrementing primary key</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
     <span class="n">reorder</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
     <span class="n">cars</span> <span class="o">=</span> <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
@@ -100,6 +129,16 @@
 
 <div class="viewcode-block" id="search_car"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.search_car">[docs]</a><span class="nd">@login_required</span>
 <span class="k">def</span> <span class="nf">search_car</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uses login_required decorator to secure view by forcing the client </span>
+<span class="sd">    to authenticate with a valid logged-in User. After fetching search text submited via</span>
+<span class="sd">    htmx post request it filters existing Car model objects. It is also excluding from</span>
+<span class="sd">    search results currently logged-in UserCars objects. It utilizes icontains parameter</span>
+<span class="sd">    to ensure case insensitive filtering.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">search_text</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">)</span>
 
     <span class="n">user_cars</span> <span class="o">=</span> <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
@@ -111,17 +150,48 @@
 
 <div class="viewcode-block" id="detail"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.detail">[docs]</a><span class="nd">@login_required</span>
 <span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uses login_required decorator to secure view by forcing the client </span>
+<span class="sd">    to authenticate with a valid logged-in User. It returns details of a single model instance</span>
+<span class="sd">    to be available in the frontend as a context dictionary.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    :type name: int</span>
+<span class="sd">    :param id: field added automatically by django - auto-incrementing primary key</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">user_car</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">UserCars</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;user_car&quot;</span><span class="p">:</span> <span class="n">user_car</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;partials/car_detail.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="cars_partial"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.cars_partial">[docs]</a><span class="nd">@login_required</span>
 <span class="k">def</span> <span class="nf">cars_partial</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uses login_required decorator to secure view by forcing the client </span>
+<span class="sd">    to authenticate with a valid logged-in User. It will return all UserCars model</span>
+<span class="sd">    instances for currently logged-in user.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cars</span> <span class="o">=</span> <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;partials/car_list.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;cars&#39;</span><span class="p">:</span> <span class="n">cars</span><span class="p">})</span></div>
 
 <div class="viewcode-block" id="upload_photo"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.upload_photo">[docs]</a><span class="nd">@login_required</span>
 <span class="k">def</span> <span class="nf">upload_photo</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function uses login_required decorator to secure view by forcing the client </span>
+<span class="sd">    to authenticate with a valid logged-in User. It will fetch an existing instance of</span>
+<span class="sd">    UserCars model given id provided in the frontend. It also obtains from request.FILES</span>
+<span class="sd">    uploaded image using form attribute enctype=&quot;multipart/form-data&quot;. After saving UserCars </span>
+<span class="sd">    model instance with added image this function will make it available in frontend as a </span>
+<span class="sd">    context dictionary record.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    :type name: int</span>
+<span class="sd">    :param id: field added automatically by django - auto-incrementing primary key</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">user_car</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">UserCars</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
     <span class="n">photo</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;photo&#39;</span><span class="p">)</span>
     <span class="n">user_car</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">photo</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">photo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">photo</span><span class="p">)</span>
@@ -129,9 +199,27 @@
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;partials/car_detail.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="clear"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.clear">[docs]</a><span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function will use empty string as a HttpResponse to make it available for</span>
+<span class="sd">    swapping content between two divs.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="sort"><a class="viewcode-back" href="../../htmx.html#htmx.htmx_views.sort">[docs]</a><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function will work with JavaScript Sortable library for reorderable drag-and-drop lists.</span>
+<span class="sd">    It will ensure that potential changes made to order of UserCars objects in the frontend are </span>
+<span class="sd">    also reflected in the backend. This function will take advantage of QuerySet prefetch_related method</span>
+<span class="sd">    to avoid additional queries when accessing the related objects. It will utilize bulk update method</span>
+<span class="sd">    to update different rows with different values. In this case we want to update all existing UserCars</span>
+<span class="sd">    objects with new order values obtained using JS sortable and HTMX.</span>
+
+<span class="sd">    :type name: HttpRequest object</span>
+<span class="sd">    :param request: contains metadata about the request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cars_ids_order</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="s1">&#39;car_order&#39;</span><span class="p">)</span>
     <span class="n">cars</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">updated_cars</span> <span class="o">=</span> <span class="p">[]</span>
