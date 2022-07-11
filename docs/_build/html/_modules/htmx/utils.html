@@ -63,9 +63,19 @@
              
   <h1>Source code for htmx.utils</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Max</span>
+
+<span class="c1"># App imports</span>
 <span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">UserCars</span>
 
 <div class="viewcode-block" id="get_max_order"><a class="viewcode-back" href="../../htmx.html#htmx.utils.get_max_order">[docs]</a><span class="k">def</span> <span class="nf">get_max_order</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function will return integer holding the value of 1 in case of non existing</span>
+<span class="sd">    UserCars model objects. Otherwise it will use django aggergate mechanism as well as </span>
+<span class="sd">    Max function to retrieve a maximum value of &#39;order&#39; field incremented by 1.</span>
+
+<span class="sd">    :type name: object</span>
+<span class="sd">    :param user: contains data about logged-in user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">existing_cars</span> <span class="o">=</span> <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">existing_cars</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">return</span> <span class="mi">1</span>
@@ -74,6 +84,15 @@
         <span class="k">return</span> <span class="n">current_max</span> <span class="o">+</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="reorder"><a class="viewcode-back" href="../../htmx.html#htmx.utils.reorder">[docs]</a><span class="k">def</span> <span class="nf">reorder</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function will firstly check for existing UserCars model objects and it will</span>
+<span class="sd">    use django count function to obtain the number of instances. After incrementing </span>
+<span class="sd">    by 1 and passing to range function the returned sequence of numbers will serve as a</span>
+<span class="sd">    new ordering for car objects belonging to logged-in user.</span>
+
+<span class="sd">    :type name: object</span>
+<span class="sd">    :param user: contains data about logged-in user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">existing_cars</span> <span class="o">=</span> <span class="n">UserCars</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">existing_cars</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">return</span>

@@ -693,12 +693,29 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.utils.get_max_order">
 <span class="sig-prename descclassname"><span class="pre">htmx.utils.</span></span><span class="sig-name descname"><span class="pre">get_max_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/htmx/utils.html#get_max_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.utils.get_max_order" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function will return integer holding the value of 1 in case of non existing
+UserCars model objects. Otherwise it will use django aggergate mechanism as well as
+Max function to retrieve a maximum value of ‘order’ field incremented by 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – contains data about logged-in user</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="htmx.utils.reorder">
 <span class="sig-prename descclassname"><span class="pre">htmx.utils.</span></span><span class="sig-name descname"><span class="pre">reorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/htmx/utils.html#reorder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#htmx.utils.reorder" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This function will firstly check for existing UserCars model objects and it will
+use django count function to obtain the number of instances. After incrementing
+by 1 and passing to range function the returned sequence of numbers will serve as a
+new ordering for car objects belonging to logged-in user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – contains data about logged-in user</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-htmx.views">
