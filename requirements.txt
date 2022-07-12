@@ -1,7 +1,6 @@
 alabaster==0.7.12
 asgiref==3.5.2
 Babel==2.10.3
-backports.zoneinfo==0.2.1
 certifi==2022.6.15
 cffi==1.15.0
 charset-normalizer==2.0.12
@@ -14,7 +13,6 @@ django-extensions==3.1.5
 django-htmx==1.12.0
 django-widget-tweaks==1.4.12
 docutils==0.17.1
-gunicorn
 idna==3.3
 imagesize==1.4.1
 importlib-metadata==4.12.0
@@ -23,6 +21,7 @@ MarkupSafe==2.1.1
 oauthlib==3.2.0
 packaging==21.3
 Pillow==9.1.1
+psycopg2-binary>=2.8
 pycparser==2.21
 Pygments==2.12.0
 PyJWT==2.4.0
