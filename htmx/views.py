@@ -24,19 +24,6 @@ class HomeView(View):
         """
         return render(request, 'index.html')
 
-class SphinxView(View):
-
-    """SphinxView Class will render sphinx page."""
-    
-    def get(self, request):
-        """
-        This function is responsible for handling HTTP GET requests.
-
-        :type name: HttpRequest object
-        :param request: contains metadata about the request
-        """
-        return render(request, 'sphinx.html')
-
 class RegisterView(FormView):
 
     """
