@@ -1,4 +1,4 @@
-'''from django.test import TestCase, Client
+from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from django.contrib.auth.views import LogoutView
 
@@ -152,5 +152,5 @@ class ViewsTest(TestCase):
         response = self.client.get(reverse('car_list'))
         ctx_car = response.context['cars'].get()
         self.assertIsNotNone(response.context['cars'])
-        self.assertEqual(ctx_car.car.producer, 'porshe')'''
+        self.assertEqual(ctx_car.car.producer, 'porshe')
 
