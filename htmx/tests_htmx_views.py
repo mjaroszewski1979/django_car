@@ -288,6 +288,40 @@ class HtmxViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, b'')
 
+    def test_sort_url_is_resolved(self):
+        """
+        This is test method to verify if appropriate view name is retrieved from a
+        given url parameter.
+        """
+        url = reverse('sort')
+        self.assertEquals(resolve(url).func, htmx_views.sort)
+
+    def test_sort_get(self):
+        """
+        This is test method to verify if appropriate view name is retrieved from a
+        given url parameter.
+        """
+        data1 = {
+            'car_producer' : 'audi',
+
+        }
+        data2 = {
+            'car_producer' : 'skoda',
+
+        }
+        self.client.force_login(user=self.user)
+        self.client.post(reverse('add_car'), data1)
+        self.client.post(reverse('add_car'), data2)
+        car_order = {
+            1 : 'skoda',
+            2 : 'audi'
+        }
+        response = self.client.post(reverse('sort'), car_order)
+        cars = response.context['cars']
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'partials/car_list.html')
+
+
 
 
         
