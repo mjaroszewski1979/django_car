@@ -3,22 +3,28 @@ from PIL import Image
 
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from django.contrib.auth.views import LogoutView
 
-
+# App imports
 from .models import Car, UserCars, User
 from . import htmx_views
 
 
 def generate_photo_file():
-        file = io.BytesIO()
-        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
-        image.save(file, 'png')
-        file.name = 'test.png'
-        file.seek(0)
-        return file
+    '''
+    This function will return an artificial image for testing purposes.
+    '''
+    file = io.BytesIO()
+    image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+    image.save(file, 'png')
+    file.name = 'test.png'
+    file.seek(0)
+    return file
 
 class HtmxViewsTest(TestCase):
+    '''
+    This class will include test methods neccessary to check if htmx_views.py file
+    behaves as expected.
+    '''
 
     def setUp(self):
         """
@@ -301,23 +307,15 @@ class HtmxViewsTest(TestCase):
         This is test method to verify if appropriate view name is retrieved from a
         given url parameter.
         """
-        data1 = {
-            'car_producer' : 'audi',
-
-        }
-        data2 = {
-            'car_producer' : 'skoda',
-
-        }
         self.client.force_login(user=self.user)
-        self.client.post(reverse('add_car'), data1)
-        self.client.post(reverse('add_car'), data2)
-        car_order = {
-            1 : 'skoda',
-            2 : 'audi'
-        }
+        self.client.post(reverse('add_car'), {'car_producer' : 'audi'})
+        self.client.post(reverse('add_car'), {'car_producer' : 'skoda'})
+        cars = UserCars.objects.filter(user=self.user)
+        for car in cars:
+            car_order = {
+                car.order : car.car.producer
+            }
         response = self.client.post(reverse('sort'), car_order)
-        cars = response.context['cars']
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'partials/car_list.html')
 

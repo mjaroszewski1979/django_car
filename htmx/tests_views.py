@@ -2,11 +2,15 @@ from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from django.contrib.auth.views import LogoutView
 
-
+# App imports
 from .models import Car, UserCars, User
 from . import views
 
 class ViewsTest(TestCase):
+    '''
+    This class will include test methods neccessary to check if views.py file
+    behaves as expected.
+    '''
 
     def setUp(self):
         """
