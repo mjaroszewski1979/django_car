@@ -130,8 +130,8 @@ class ViewsTest(TestCase):
 
     def test_car_list_get_authenticated_user(self):
         """
-        This is test method to verify if acquired response to a get request has correct status code,
-        html title content and uses appropriate template.
+        This is test method to verify if acquired response to a get request made by authenticated user
+        has correct status code, html title content and uses appropriate template.
         """
         self.client.force_login(user=self.user)
         response = self.client.get(reverse('car_list'))

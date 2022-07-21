@@ -1,0 +1,18 @@
+[run]
+omit =
+    venv/*
+    static/*
+    mycars\__init__.py	    
+    mycars\settings.py	
+    mycars\asgi.py	
+    mycars\wsgi.py	
+    htmx\__init__.py	
+    htmx\admin.py	
+    htmx\apps.py	
+    htmx\forms.py	
+    htmx\models.py		
+    htmx\tests_utils.py	
+    htmx\tests_views.py	
+    htmx\tests_htmx_views.py	
+    htmx\migrations\*
+    manage.py

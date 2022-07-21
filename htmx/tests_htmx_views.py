@@ -99,8 +99,10 @@ class HtmxViewsTest(TestCase):
 
     def test_add_car_post_authenticated_user(self):
         """
-        This is test method to verify if acquired response to a post request made by authenticated user
-        has the expected context dictionary passed to the template and returns correct status code.
+        This is test method to verify if acquired response to a post request made by authenticated user:
+        - has the expected context dictionary passed to the template
+        - returns correct status code
+        - uses appropriate template
         """
         data = {
             'car_producer' : 'audi'
@@ -130,8 +132,8 @@ class HtmxViewsTest(TestCase):
 
     def test_delete_car_get_authenticated_user(self):
         """
-        This is test method to verify if:
-        - acquired response to a delete request has correct status code 
+        This is test method to verify if acquired response to a delete request has:
+        -  correct status code 
         - returns expected number of UserCars instances
         - response has the expected context dictionary passed to the template
         - view function is using accurate template
@@ -170,8 +172,11 @@ class HtmxViewsTest(TestCase):
 
     def test_search_car_post_authenticated_user(self):
         """
-        This is test method to verify if acquired response to a post request made by authenticated user
-        has the expected context dictionary passed to the template and returns correct status code.
+        This is test method to verify if:
+        - acquired response to a delete request has correct status code 
+        - returns expected number of UserCars instances
+        - response has the expected context dictionary passed to the template
+        - view function is using accurate template
         """
         data = {
             'search' : 'porshe'
@@ -201,7 +206,10 @@ class HtmxViewsTest(TestCase):
 
     def test_detail_get_authenticated_user(self):
         """
-        This is test method to verify if acquired response to a post request has correct status code.
+        This is test method to verify if acquired response to a get request made by authenticated user:
+        - has the expected context dictionary passed to the template
+        - returns correct status code
+        - uses appropriate template
         """
         data = {
             'car_producer' : 'audi'
@@ -232,7 +240,10 @@ class HtmxViewsTest(TestCase):
 
     def test_cars_partial_get_authenticated_user(self):
         """
-        This is test method to verify if acquired response to a post request has correct status code.
+        This is test method to verify if acquired response to a get request made by authenticated user:
+        - has the expected context dictionary passed to the template
+        - returns correct status code
+        - uses appropriate template
         """
         self.client.force_login(user=self.user)
         response = self.client.get(reverse('car_list_partial'))
@@ -259,8 +270,10 @@ class HtmxViewsTest(TestCase):
 
     def test_upload_photo_post_authenticated_user(self):
         """
-        This is test method to verify if acquired response to a post request made by authenticated user
-        has the expected context dictionary passed to the template and returns correct status code.
+        This is test method to verify if acquired response to a post request made by authenticated user:
+        - has the expected context dictionary passed to the template
+        - returns correct status code
+        - uses appropriate template
         """
         image = {
             'photo' : generate_photo_file()
@@ -287,8 +300,7 @@ class HtmxViewsTest(TestCase):
 
     def test_clear_get(self):
         """
-        This is test method to verify if appropriate view name is retrieved from a
-        given url parameter.
+        This is test method to verify if acquired response to a get request has correct status code.
         """
         response = self.client.get(reverse('clear'))
         self.assertEqual(response.status_code, 200)
@@ -304,8 +316,8 @@ class HtmxViewsTest(TestCase):
 
     def test_sort_get(self):
         """
-        This is test method to verify if appropriate view name is retrieved from a
-        given url parameter.
+        This is test method to verify if acquired response to a get request has correct status code and
+        uses appropriate template.
         """
         self.client.force_login(user=self.user)
         self.client.post(reverse('add_car'), {'car_producer' : 'audi'})
