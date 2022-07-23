@@ -17,6 +17,14 @@
 
 --------------------------------------------------
 
+### Code Coverage:
+
+
+<img src="https://github.com/mjaroszewski1979/django_car/blob/main/cov_report.png">
+
+
+--------------------------------------------------
+
 ![caption](https://github.com/mjaroszewski1979/django_car/blob/main/mjcars_mockup.png)
   
   Live | Code | Docs | Docker | Technologies
