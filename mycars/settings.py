@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_htmx',
     'htmx',
+    'tests_selenium',
 ]
 
 MIDDLEWARE = [
