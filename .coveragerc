@@ -15,4 +15,5 @@ omit =
     htmx\tests_views.py	
     htmx\tests_htmx_views.py	
     htmx\migrations\*
+    tests_selenium\*
     manage.py

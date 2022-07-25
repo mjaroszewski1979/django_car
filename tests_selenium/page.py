@@ -3,7 +3,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from .locators import (
     HomePageLocators,
     RegisterPageLocators,
-    LoginPageLocators
+    LoginPageLocators, 
+    CarsListPageLocators
 )
 import time
 
@@ -38,6 +39,13 @@ class BasePage(object):
     def get_element_text(self, locator):
         element = W(self.driver, 10).until(EC.visibility_of_element_located(locator))
         return element.text
+
+    def do_login(self):
+        self.do_clear(LoginPageLocators.USERNAME_FIELD)
+        self.do_clear(LoginPageLocators.PASSWORD_FIELD)
+        self.do_send_keys(LoginPageLocators.USERNAME_FIELD, 'testuser')
+        self.do_send_keys(LoginPageLocators.PASSWORD_FIELD, '12345')
+        self.do_click(LoginPageLocators.LOGIN_BUTTON)
 
 
 
@@ -87,10 +95,44 @@ class LoginPage(BasePage):
         return 'My Rides | Login' in self.driver.title 
 
     def is_login_form_works(self):
-        self.do_clear(LoginPageLocators.USERNAME_FIELD)
-        self.do_clear(LoginPageLocators.PASSWORD_FIELD)
-        self.do_send_keys(LoginPageLocators.USERNAME_FIELD, 'testuser')
-        self.do_send_keys(LoginPageLocators.PASSWORD_FIELD, '12345')
-        self.do_click(LoginPageLocators.LOGIN_BUTTON)
+        self.do_login()
         logout_text = self.get_element_text(LoginPageLocators.LOGOUT_LINK)
         return 'LOGOUT' in logout_text
+
+    def is_logout_link_works(self):
+        self.do_click(LoginPageLocators.LOGOUT_LINK)
+        return 'My Rides | Home Page' in self.driver.title
+
+class CarsListPage(BasePage):
+
+    def is_title_matches(self):
+        return 'My Rides | Cars List' in self.driver.title 
+
+    def is_cars_list_heading_displayed_correctly(self):
+        cars_list_heading = self.get_element_text(CarsListPageLocators.CARS_LIST_HEADING)
+        text = 'MY CARS'
+        return text in cars_list_heading
+
+    def is_no_cars_para_displayed_correctly(self):
+        no_cars_para = self.get_element_text(CarsListPageLocators.NO_CARS_YET_PARA)
+        text = 'YOU DO NOT HAVE CARS YET...'
+        return text in no_cars_para
+
+    def is_search_cars_form_works(self):
+        self.do_clear(CarsListPageLocators.SEARCH_CARS_FIELD)
+        self.do_send_keys(CarsListPageLocators.SEARCH_CARS_FIELD, 'porshe')
+        self.do_click(CarsListPageLocators.ADD_CAR_BUTTON)
+        car_list_item_text = self.get_element_text(CarsListPageLocators.CAR_LIST_ITEM)
+        return 'PORSHE' in car_list_item_text
+
+    def is_add_car_form_works(self):
+        self.do_clear(CarsListPageLocators.ADD_CAR_FIELD)
+        self.do_send_keys(CarsListPageLocators.ADD_CAR_FIELD, 'audi')
+        self.do_click(CarsListPageLocators.ADD_CAR_SUBMIT)
+        message_text = self.get_element_text(CarsListPageLocators.MESSAGE_TEXT)
+        return 'ADDED AUDI TO LIST OF CARS' in message_text
+
+
+
+    
+
