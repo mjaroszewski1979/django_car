@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait as W
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
 from .locators import (
     HomePageLocators,
     RegisterPageLocators,
@@ -108,6 +109,10 @@ class CarsListPage(BasePage):
     def is_title_matches(self):
         return 'My Rides | Cars List' in self.driver.title 
 
+    def is_cars_list_link_works(self):
+        self.do_click(CarsListPageLocators.CARS_LIST_LINK)
+        return 'My Rides | Cars List' in self.driver.title 
+
     def is_cars_list_heading_displayed_correctly(self):
         cars_list_heading = self.get_element_text(CarsListPageLocators.CARS_LIST_HEADING)
         text = 'MY CARS'
@@ -131,6 +136,9 @@ class CarsListPage(BasePage):
         self.do_click(CarsListPageLocators.ADD_CAR_SUBMIT)
         message_text = self.get_element_text(CarsListPageLocators.MESSAGE_TEXT)
         return 'ADDED AUDI TO LIST OF CARS' in message_text
+
+
+
 
 
 

@@ -41,7 +41,7 @@ class HtmxViewsTest(TestCase):
 
     def tearDown(self):
         """
-        This method is called after every test function to set up any objects
+        This method is called after every test function to delete existing objects
         neccessary to perform a specified task. 
         """
         self.user.delete()
