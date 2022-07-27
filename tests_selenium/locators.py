@@ -1,6 +1,11 @@
 from selenium.webdriver.common.by import By
 
 class HomePageLocators(object):
+    '''
+    This class will include web element locators neccessary to perform home page test automation process.
+    :type name: ChromeDriver interface.
+    :param object: standalone server that Selenium WebDriver uses to launch Google Chrome.
+    '''
     
     HOME_HEADING = (By.XPATH, "//header[@id='header']//h1")
     REGISTER_LINK = (By.LINK_TEXT, 'REGISTER')
@@ -8,6 +13,11 @@ class HomePageLocators(object):
     HOME_LINK = (By.LINK_TEXT, 'RIDES BY MJ')
 
 class RegisterPageLocators(object):
+    '''
+    This class will include web element locators neccessary to perform register page test automation process.
+    :type name: ChromeDriver interface.
+    :param object: standalone server that Selenium WebDriver uses to launch Google Chrome.
+    '''
 
     USERNAME_FIELD = (By.NAME, 'username')
     PASSWORD1_FIELD = (By.NAME, 'password1')
@@ -15,6 +25,11 @@ class RegisterPageLocators(object):
     SUBMIT_BUTTON = (By.XPATH, "//div[@class='register']//section//ul[@class='actions']//input[@class='primary']")
 
 class LoginPageLocators(object):
+    '''
+    This class will include web element locators neccessary to perform login page test automation process.
+    :type name: ChromeDriver interface.
+    :param object: standalone server that Selenium WebDriver uses to launch Google Chrome.
+    '''
 
     USERNAME_FIELD = (By.NAME, 'username')
     PASSWORD_FIELD = (By.NAME, 'password')
@@ -22,6 +37,11 @@ class LoginPageLocators(object):
     LOGOUT_LINK = (By.LINK_TEXT, 'LOGOUT')
 
 class CarsListPageLocators(object):
+    '''
+    This class will include web element locators neccessary to perform cars list page test automation process.
+    :type name: ChromeDriver interface.
+    :param object: standalone server that Selenium WebDriver uses to launch Google Chrome.
+    '''
 
     CARS_LIST_HEADING = (By.XPATH, "//div[@class='car-list-main']//h3")
     CARS_LIST_LINK = (By.LINK_TEXT, 'MY CARS')

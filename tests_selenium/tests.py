@@ -3,9 +3,7 @@ from django.urls import reverse
 from selenium import webdriver
 from . import page
 from htmx.models import User, Car
-
-
-
+       
 
 
 class MJCarsTest(StaticLiveServerTestCase):

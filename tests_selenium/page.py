@@ -1,6 +1,5 @@
 from selenium.webdriver.support.ui import WebDriverWait as W
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver import ActionChains
 from .locators import (
     HomePageLocators,
     RegisterPageLocators,
@@ -12,45 +11,95 @@ import time
 
 
 class BasePage(object):
-
+    '''
+    This is a base class to provide an interface and make sure that derived concrete classes are properly implemented. It will include 
+    abstract methods neccessary to perform the most common test automation processes.
+    :type name: ChromeDriver interface.
+    :param object: standalone server that Selenium WebDriver uses to launch Google Chrome.
+    '''
 
     def __init__(self, driver):
+        """
+        This method will automatically run to enforce upon object creation the initial web driver values. 
+        :type name: ChromeDriver interface.
+        :param driver: standalone server that Selenium WebDriver uses to launch Google Chrome.
+        """
         self.driver = driver
 
     def do_clear(self, locator):
+        """
+        This method is used to clear text of any field, such as input field of a form.
+        :type name: Selenium locator.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        """
         W(self.driver, 10).until(EC.visibility_of_element_located(locator)).clear()
 
     def do_click(self, locator):
+        """
+        This method is used to perform various mouse-based operations for web-application.
+        :type name: Selenium locator.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        """
         W(self.driver, 10).until(EC.visibility_of_element_located(locator)).click()
 
+    def do_login(self, username, password):
+        """
+        This method is used to perform login attempts with registered user credentials.
+        :type name: string.
+        :param username: authenticate a user when logging into web application.
+        :type name: string.
+        :param password: authenticate a user when logging into web application.
+        """
+        self.do_clear(LoginPageLocators.USERNAME_FIELD)
+        self.do_clear(LoginPageLocators.PASSWORD_FIELD)
+        self.do_send_keys(LoginPageLocators.USERNAME_FIELD, username)
+        self.do_send_keys(LoginPageLocators.PASSWORD_FIELD, password)
+        self.do_click(LoginPageLocators.LOGIN_BUTTON)
+
     def do_submit(self, locator):
+        """
+        This method is applicable only for <form> and it can be used with any element inside a form.
+        :type name: Selenium locator.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        """
         W(self.driver, 10).until(EC.visibility_of_element_located(locator)).submit()
 
     def do_send_keys(self, locator, text):
+        """
+        This is a method used to enter editable content in the text and password fields during test execution.
+        :type name: Selenium locator.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        :type name: string.
+        :param text: keyboard input such as characters, numbers, and symbols to text boxes inside an application.
+        """
         W(self.driver, 10).until(EC.visibility_of_element_located(locator)).send_keys(text)
 
     def get_element(self, locator):
+        """
+        This method is used to find a unique web element within the webpage and it returns an object of type WebElement.
+        :type name: Selenium locator.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        """
         element = W(self.driver, 10).until(EC.visibility_of_element_located(locator))
         return element
 
     def get_elements(self, locator):
+        """
+        This method is used to find a list of unique web elements within the webpage and it returns 
+        the list of web elements that match the locator value, unlike get_element, which returns only a single web element.
+        :type name: Selenium locator.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        """
         elements = W(self.driver, 10).until(EC.visibility_of_all_elements_located(locator))
         return elements
 
     def get_element_text(self, locator):
+        """
+        This method is used to bring out the text that is visible in the HTML content. It ignores the spaces inside the HTML file.
+        :param locator: address that identifies a web element uniquely within the webpage.
+        """
         element = W(self.driver, 10).until(EC.visibility_of_element_located(locator))
         return element.text
-
-    def do_login(self):
-        self.do_clear(LoginPageLocators.USERNAME_FIELD)
-        self.do_clear(LoginPageLocators.PASSWORD_FIELD)
-        self.do_send_keys(LoginPageLocators.USERNAME_FIELD, 'testuser')
-        self.do_send_keys(LoginPageLocators.PASSWORD_FIELD, '12345')
-        self.do_click(LoginPageLocators.LOGIN_BUTTON)
-
-
-
-    
 
 
 class HomePage(BasePage):
@@ -96,7 +145,7 @@ class LoginPage(BasePage):
         return 'My Rides | Login' in self.driver.title 
 
     def is_login_form_works(self):
-        self.do_login()
+        self.do_login(username='testuser', password='12345')
         logout_text = self.get_element_text(LoginPageLocators.LOGOUT_LINK)
         return 'LOGOUT' in logout_text
 
