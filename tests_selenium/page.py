@@ -103,6 +103,10 @@ class BasePage(object):
 
 
 class HomePage(BasePage):
+    '''
+    This class will include functional tests in reference to the home page.
+    All test cases are executed on Google Chrome.
+    '''
 
     def is_title_matches(self):
         return 'My Rides | Home Page' in self.driver.title
