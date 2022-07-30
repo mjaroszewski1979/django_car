@@ -109,31 +109,53 @@ class HomePage(BasePage):
     '''
 
     def is_title_matches(self):
+        """
+        This is test method to verify if the correct title is displayed.
+        """
         return 'My Rides | Home Page' in self.driver.title
 
     def is_home_heading_displayed_correctly(self):
+        """
+        This is test method to verify if the correct heading is displayed.
+        """
         home_heading = self.get_element_text(HomePageLocators.HOME_HEADING)
         text = 'RIDES BY MJ'
         return text in home_heading
 
     def is_register_link_works(self):
+        """
+        This is test method to verify if register page link works as expected.
+        """
         self.do_click(HomePageLocators.REGISTER_LINK)
         return 'My Rides | Register' in self.driver.title
 
     def is_login_link_works(self):
+        """
+        This is test method to verify if login page link works as expected.
+        """
         self.do_click(HomePageLocators.LOGIN_LINK)
         return 'My Rides | Login' in self.driver.title
 
     def is_home_link_works(self):
+        """
+        This is test method to verify if home page link works as expected.
+        """
         self.do_click(HomePageLocators.HOME_LINK)
         return 'My Rides | Home Page' in self.driver.title
 
 class RegisterPage(BasePage):
 
     def is_title_matches(self):
+        """
+        This is test method to verify if the correct title is displayed.
+        """
         return 'My Rides | Register' in self.driver.title 
 
     def is_register_form_works(self):
+        """
+        This is test method to verify if the registration form works as expected when provided with
+        valid data.
+        """
         self.do_clear(RegisterPageLocators.USERNAME_FIELD)
         self.do_clear(RegisterPageLocators.PASSWORD1_FIELD)
         self.do_clear(RegisterPageLocators.PASSWORD2_FIELD)
@@ -146,37 +168,64 @@ class RegisterPage(BasePage):
 class LoginPage(BasePage):
 
     def is_title_matches(self):
+        """
+        This is test method to verify if the correct title is displayed.
+        """
         return 'My Rides | Login' in self.driver.title 
 
     def is_login_form_works(self):
+        """
+        This is test method to verify if the login form works as expected when provided with
+        valid data.
+        """
         self.do_login(username='testuser', password='12345')
         logout_text = self.get_element_text(LoginPageLocators.LOGOUT_LINK)
         return 'LOGOUT' in logout_text
 
     def is_logout_link_works(self):
+        """
+        This is test method to verify if logout link works as expected.
+        """
         self.do_click(LoginPageLocators.LOGOUT_LINK)
         return 'My Rides | Home Page' in self.driver.title
 
 class CarsListPage(BasePage):
 
     def is_title_matches(self):
+        """
+        This is test method to verify if the correct title is displayed.
+        """
         return 'My Rides | Cars List' in self.driver.title 
 
     def is_cars_list_link_works(self):
+        """
+        This is test method to verify if logout link works as expected.
+        """
         self.do_click(CarsListPageLocators.CARS_LIST_LINK)
         return 'My Rides | Cars List' in self.driver.title 
 
     def is_cars_list_heading_displayed_correctly(self):
+        """
+        This is test method to verify if the correct heading is displayed.
+        """
         cars_list_heading = self.get_element_text(CarsListPageLocators.CARS_LIST_HEADING)
         text = 'MY CARS'
         return text in cars_list_heading
 
     def is_no_cars_para_displayed_correctly(self):
+        """
+        This is test method to verify if the correct html element is displayed in case of
+        non existent user cars objects.
+        """
         no_cars_para = self.get_element_text(CarsListPageLocators.NO_CARS_YET_PARA)
         text = 'YOU DO NOT HAVE CARS YET...'
         return text in no_cars_para
 
     def is_search_cars_form_works(self):
+        """
+        This is test method to verify if the serach cars form works as expected when provided with
+        valid data.
+        """
         self.do_clear(CarsListPageLocators.SEARCH_CARS_FIELD)
         self.do_send_keys(CarsListPageLocators.SEARCH_CARS_FIELD, 'porshe')
         self.do_click(CarsListPageLocators.ADD_CAR_BUTTON)
@@ -184,6 +233,10 @@ class CarsListPage(BasePage):
         return 'PORSHE' in car_list_item_text
 
     def is_add_car_form_works(self):
+        """
+        This is test method to verify if the add car form works as expected when provided with
+        valid data.
+        """
         self.do_clear(CarsListPageLocators.ADD_CAR_FIELD)
         self.do_send_keys(CarsListPageLocators.ADD_CAR_FIELD, 'audi')
         self.do_click(CarsListPageLocators.ADD_CAR_SUBMIT)
