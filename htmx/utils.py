@@ -1,6 +1,7 @@
+# Import Max function from django.db.models module for retrieving the maximum value of a field
 from django.db.models import Max
 
-# App imports
+# Import UserCars model from the current application's models module
 from .models import UserCars
 
 def get_max_order(user) -> int:
