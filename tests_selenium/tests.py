@@ -1,6 +1,11 @@
+# Import StaticLiveServerTestCase from Django's testing module
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+# Import reverse function to enable retrieval of the url information
 from django.urls import reverse
+# Import the selenium web driver
 from selenium import webdriver
+
+# Import page module from the current package
 from . import page
 from htmx.models import User, Car
        
