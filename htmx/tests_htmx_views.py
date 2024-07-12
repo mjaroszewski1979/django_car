@@ -1,11 +1,15 @@
+# Import the io module for handling in-memory binary streams
 import io
+# Import the Image class from the Pillow library for image manipulation
 from PIL import Image
-
+# Import TestCase and Client classes from django.test module for testing
 from django.test import TestCase, Client
+# Import reverse and resolve functions from django.urls module for URL handling
 from django.urls import reverse, resolve
 
-# App imports
+# Import Car, UserCars, and User models from the current application's models module
 from .models import Car, UserCars, User
+# Import htmx_views module from the current application
 from . import htmx_views
 
 
