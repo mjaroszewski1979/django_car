@@ -1,1 +1,0 @@
-web: gunicorn mycars.wsgi:application
