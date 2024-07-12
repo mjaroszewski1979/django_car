@@ -1,13 +1,19 @@
+# Import HttpResponse class from django.http.response module
 from django.http.response import HttpResponse
+# Import get_object_or_404 and render functions from django.shortcuts module
 from django.shortcuts import get_object_or_404, render
+# Import get_user_model function from django.contrib.auth module
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse
+# Import require_http_methods decorator from django.views.decorators.http module
 from django.views.decorators.http import require_http_methods
+# Import login_required decorator from django.contrib.auth.decorators module
 from django.contrib.auth.decorators import login_required
+# Import messages module from django.contrib package
 from django.contrib import messages
 
-# App imports
+# Import Car and UserCars models from the current application's models module
 from .models import Car, UserCars
+# Import get_max_order and reorder functions from the current application's utils module
 from .utils import get_max_order, reorder
 
 def check_username(request):
