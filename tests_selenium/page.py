@@ -1,12 +1,18 @@
+# Import WebDriverWait class with alias W
 from selenium.webdriver.support.ui import WebDriverWait as W
+# Import expected_conditions class with alias EC
 from selenium.webdriver.support import expected_conditions as EC
+# Importing time module for handling time-related tasks
+import time
+
+# Import locators from the local module
 from .locators import (
     HomePageLocators,
     RegisterPageLocators,
     LoginPageLocators, 
     CarsListPageLocators
 )
-import time
+
 
 
 
