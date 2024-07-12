@@ -1,13 +1,21 @@
+# Import render function from django.shortcuts module for rendering templates
 from django.shortcuts import render
+# Import LoginView class from django.contrib.auth.views for handling user login
 from django.contrib.auth.views import LoginView
+# Import View class from django.views module for creating class-based views
 from django.views import View
+# Import reverse_lazy function from django.urls module for lazy URL resolution
 from django.urls import reverse_lazy
+# Import FormView class from django.views.generic module for handling forms in class-based views
 from django.views.generic import FormView
+# Import ListView class from django.views.generic.list module for displaying lists of objects
 from django.views.generic.list import ListView
+# Import LoginRequiredMixin from django.contrib.auth.mixins to enforce login requirements
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-# App imports
+# Import RegisterForm class from the current application's forms module
 from .forms import RegisterForm
+# Import UserCars model from the current application's models module
 from .models import UserCars
 
 
