@@ -1,9 +1,13 @@
+# Import TestCase and Client classes from django.test module for creating and running tests
 from django.test import TestCase, Client
+# Import reverse and resolve functions from django.urls module for URL handling and URL resolution
 from django.urls import reverse, resolve
+# Import LogoutView class from django.contrib.auth.views for handling user logout
 from django.contrib.auth.views import LogoutView
 
-# App imports
+# Import Car, UserCars, and User models from the current application's models module
 from .models import Car, UserCars, User
+# Import views module from the current application for handling request logic
 from . import views
 
 class ViewsTest(TestCase):
