@@ -1,8 +1,11 @@
+# Import TestCase and Client classes from django.test module for creating and running tests
 from django.test import TestCase, Client
+# Import reverse function from django.urls module for URL resolution
 from django.urls import reverse
 
-# App imports
+# Import Car, UserCars, and User models from the current application's models module
 from .models import Car, UserCars, User
+# Import get_max_order and reorder utility functions from the current application's utils module
 from .utils import get_max_order, reorder
 
 
