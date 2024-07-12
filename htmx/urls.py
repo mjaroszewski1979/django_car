@@ -1,6 +1,9 @@
+# Import path and include functions from django.urls module for routing URLs
 from django.urls import path, include
+# Import LogoutView class from django.contrib.auth.views for handling user logout
 from django.contrib.auth.views import LogoutView
 
+# Import views and htmx_views modules from the current application for handling request logic
 from . import views, htmx_views
 
 
