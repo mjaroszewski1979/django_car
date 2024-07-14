@@ -72,6 +72,45 @@ Requirement | Condition | Expected Outcome | Test Case
 The view name must be resolved correctly for the sort URL. | When the URL for sorting data is resolved. | The resolved function should be htmx_views.sort. | test_sort_url_is_resolved
 The sort view must handle GET requests correctly. | When a GET request is made to the sort URL. | The response should have a status code of 200. The response should use the partials/car_list.html template. | test_sort_get
 
+#### Index View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The index view must handle GET requests correctly. | When a GET request is made to the index URL. | The response should have a status code of 200, use the index.html template. The response must contain the text 'My Rides Home Page'. | test_index_get
+The index URL must resolve to the correct view. | When the index URL is resolved. | The URL should resolve to HomeView. | test_index_url_is_resolved
+
+#### Register View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The register view must handle GET requests correctly. | When a GET request is made to the register URL. | The response should have a status code of 200, use the register.html template. The response must contain the text 'My Rides Register'. | test_register_get
+The register view must handle POST requests correctly. | When a POST request is made to the register URL with valid user data. | The response should have a status code of 200, use the login.html template. The response must contain the text 'My Rides Login'. | test_register_post
+The register URL must resolve to the correct view. | When the register URL is resolved. | The URL should resolve to RegisterView. | test_register_url_is_resolved
+
+#### Login View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The login view must handle GET requests correctly. | When a GET request is made to the login URL. | The response should have a status code of 200, use the login.html template. The response must contain the text 'My Rides Login'. | test_login_get
+The login view must handle POST requests correctly. | When a POST request is made to the login URL with valid user credentials. | The response should have a status code of 200, use the login.html template. The response must contain the text 'My Rides Login'. | test_login_post
+The login URL must resolve to the correct view. | When the login URL is resolved. | The URL should resolve to Login. | test_login_url_is_resolved
+
+#### Logout View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The logout URL must resolve to the correct view. | When the logout URL is resolved. | The URL should resolve to LogoutView. | test_logout_url_is_resolved
+
+#### Car List View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The car list view must handle GET requests correctly for authenticated users. | When an authenticated user makes a GET request to the car list URL. | The response should have a status code of 200, use the cars.html template. The response must contain the text 'My Rides Cars List'. | test_car_list_get_authenticated_user
+The car list view must handle GET requests correctly for anonymous users. | When an anonymous user makes a GET request to the car list URL. | The response should have a status code of 302 (redirect). | test_car_list_get_anonymous_user
+The car list view must provide the correct context for authenticated users. | When an authenticated user makes a GET request to the car list URL. | The response context should include the user's cars. | The context should contain the car with the producer 'porshe'. | test_car_list_context
+The car list URL must resolve to the correct view. | When the car list URL is resolved. | The URL should resolve to CarList. | test_car_list_url_is_resolved
+
+
 #### Utility Functions Requirements
 
 Requirement | Condition | Expected Outcome | Test Case
