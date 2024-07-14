@@ -120,6 +120,46 @@ The get_max_order function must return the initial order number correctly for a 
 The reorder function must correctly reorder the cars for a user with existing cars after a deletion. | When the reorder function is called with a user object after deleting a car. | The remaining cars should be reordered correctly, with the audi car having an order of 1. | test_reorder_existing_cars
 The reorder function must handle cases where the user has no cars correctly. | When the reorder function is called with a user object that has no existing cars. | The function should return None. | test_reorder_no_cars
 
+### Selenium Tests
+
+#### Home Page Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The home page must display the correct title. | When the home page is loaded. | The page title should be 'My Rides Home Page'. | is_title_matches
+The home page must display the correct heading. | When the home page is loaded. | The heading should contain the text 'RIDES BY MJ'. | is_home_heading_displayed_correctly
+The register link on the home page must navigate to the register page correctly. | When the register link is clicked. | The page title should be 'My Rides Register'. | is_register_link_works
+The login link on the home page must navigate to the login page correctly. | When the login link is clicked. | The page title should be 'My Rides Login'. | is_login_link_works
+The home link must navigate back to the home page correctly. | When the home link is clicked. | The page title should be 'My Rides Home Page'. | is_home_link_works
+
+#### Register Page Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The register page must display the correct title. | When the register page is loaded. | The page title should be 'My Rides Register'. | is_title_matches
+The registration form must submit correctly with valid data. | When valid data is entered and the form is submitted. | The user should be redirected to the login page and the page title should be 'My Rides Login'. | is_register_form_works
+
+#### Login Page Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The login page must display the correct title. | When the login page is loaded. | The page title should be 'My Rides Login'. | is_title_matches
+The login form must submit correctly with valid credentials. | When valid credentials are entered and the form is submitted. | The user should see a 'LOGOUT' link indicating successful login. | is_login_form_works
+The logout link must log the user out and redirect to the home page. | When the logout link is clicked. | The user should be redirected to the home page and the page title should be 'My Rides Home Page'. | is_logout_link_works
+
+#### Cars List Page Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The cars list page must display the correct title. | When the cars list page is loaded. | The page title should be 'My Rides Cars List'. | is_title_matches
+The cars list link must navigate to the cars list page correctly. | When the cars list link is clicked. | The page title should be 'My Rides Cars List'. | is_cars_list_link_works
+The cars list page must display the correct heading. | When the cars list page is loaded. | The heading should contain the text 'MY CARS'. | is_cars_list_heading_displayed_correctly
+The cars list page must display the correct message when no cars are present. | When the user has no cars. | The page should display the text 'YOU DO NOT HAVE CARS YET...'. | is_no_cars_para_displayed_correctly
+The search cars form must work correctly with valid data. | When valid data is entered and the form is submitted. | The list should update and display the searched car, e.g., 'PORSHE'. | is_search_cars_form_works
+The add car form must submit correctly with valid data. | When valid data is entered and the form is submitted. | A message should display confirming the addition of the car, e.g., 'ADDED AUDI TO LIST OF CARS'. | is_add_car_form_works
+
+
+
 
 
 
