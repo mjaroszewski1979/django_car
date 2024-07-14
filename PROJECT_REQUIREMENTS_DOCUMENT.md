@@ -24,7 +24,7 @@ Requirement | Condition | Expected Outcome | Test Case
 ----------- | --------- | ---------------- | ---------
 The view name must be resolved correctly for the delete car URL. | When the URL for deleting a car is resolved. | The resolved function should be htmx_views.delete_car. | test_delete_car_url_is_resolved
 The delete car view must handle GET requests by anonymous users correctly. | When a GET request is made to the delete car URL by an anonymous user. | The response should have a status code of 302. | test_delete_car_get_anonymous_user
-The delete car view must handle DELETE requests by authenticated users correctly. When a DELETE request is made to the delete car URL by an authenticated user. The response should have a status code of 200. | The context dictionary should include cars with no cars left. The response should use the partials/car_list.html template. | test_delete_car_get_authenticated_user
+The delete car view must handle DELETE requests by authenticated users correctly. | When a DELETE request is made to the delete car URL by an authenticated user. The response should have a status code of 200. | The context dictionary should include cars with no cars left. The response should use the partials/car_list.html template. | test_delete_car_get_authenticated_user
 
 #### Search Car View Requirements
 
