@@ -38,5 +38,41 @@ The search car view must handle POST requests by authenticated users correctly. 
 
 Requirement | Condition | Expected Outcome | Test Case
 ----------- | --------- | ---------------- | ---------
+The view name must be resolved correctly for the detail URL. | When the URL for car detail is resolved. | The resolved function should be htmx_views.detail. | test_detail_url_is_resolved
+The detail view must handle GET requests by anonymous users correctly. | When a GET request is made to the detail URL by an anonymous user. | The response should have a status code of 302. | test_detail_get_anonymous_user
+The detail view must handle GET requests by authenticated users correctly. | When a GET request is made to the detail URL by an authenticated user. | The response should have a status code of 200. The context dictionary should include user_car with the car producer audi. The response should use the partials/car_detail.html template. | test_detail_get_authenticated_user
+
+#### Cars Partial View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The view name must be resolved correctly for the car list partial URL. | When the URL for the car list partial is resolved. | The resolved function should be htmx_views.cars_partial. | test_cars_partial_url_is_resolved
+The car list partial view must handle GET requests by anonymous users correctly. | When a GET request is made to the car list partial URL by an anonymous user. | The response should have a status code of 302. | test_cars_partial_get_anonymous_user
+The car list partial view must handle GET requests by authenticated users correctly. | When a GET request is made to the car list partial URL by an authenticated user. | The response should have a status code of 200. The context dictionary should include cars. The response should use the partials/car_list.html template. | test_cars_partial_get_authenticated_user
+
+#### Upload Photo View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The view name must be resolved correctly for the upload photo URL. | When the URL for uploading a photo is resolved. | The resolved function should be htmx_views.upload_photo. | test_upload_photo_url_is_resolved
+The upload photo view must handle POST requests by anonymous users correctly. | When a POST request is made to the upload photo URL by an anonymous user. | The response should have a status code of 302. | test_upload_photo_post_anonymous_user
+The upload photo view must handle POST requests by authenticated users correctly. | When a POST request is made to the upload photo URL by an authenticated user. | The response should have a status code of 200. The context dictionary should include user_car. The response should use the partials/car_detail.html template. | test_upload_photo_post_authenticated_user
+
+#### Clear View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The view name must be resolved correctly for the clear URL. | When the URL for clearing data is resolved. | The resolved function should be htmx_views.clear. | test_clear_url_is_resolved
+The clear view must handle GET requests correctly. | When a GET request is made to the clear URL. | The response should have a status code of 200. The response content should be empty. | test_clear_get
+
+#### Sort View Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The view name must be resolved correctly for the sort URL. | When the URL for sorting data is resolved. | The resolved function should be htmx_views.sort. | test_sort_url_is_resolved
+The sort view must handle GET requests correctly. | When a GET request is made to the sort URL. | The response should have a status code of 200. The response should use the partials/car_list.html template. | test_sort_get
+
+
+
 
 
