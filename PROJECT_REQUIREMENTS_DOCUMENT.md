@@ -72,6 +72,15 @@ Requirement | Condition | Expected Outcome | Test Case
 The view name must be resolved correctly for the sort URL. | When the URL for sorting data is resolved. | The resolved function should be htmx_views.sort. | test_sort_url_is_resolved
 The sort view must handle GET requests correctly. | When a GET request is made to the sort URL. | The response should have a status code of 200. The response should use the partials/car_list.html template. | test_sort_get
 
+#### Utility Functions Requirements
+
+Requirement | Condition | Expected Outcome | Test Case
+----------- | --------- | ---------------- | ---------
+The get_max_order function must return the next order number correctly for a user with existing cars. | When the get_max_order function is called with a user object that has existing cars. | The function should return expected value. | test_get_max_order_existing_cars
+The get_max_order function must return the initial order number correctly for a user with no existing cars. | When the get_max_order function is called with a user object that has no existing cars. | The function should expected value. | test_get_max_order_no_cars
+The reorder function must correctly reorder the cars for a user with existing cars after a deletion. | When the reorder function is called with a user object after deleting a car. | The remaining cars should be reordered correctly, with the audi car having an order of 1. | test_reorder_existing_cars
+The reorder function must handle cases where the user has no cars correctly. | When the reorder function is called with a user object that has no existing cars. | The function should return None. | test_reorder_no_cars
+
 
 
 
